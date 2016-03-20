@@ -109,6 +109,7 @@ namespace Teamproject {
 				 this->Controls->Add(this->panel1);
 				 this->Controls->Add(this->button1);
 				 this->Name = L"MyForm";
+				 this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load_1);
 				 this->ResumeLayout(false);
 
 			 }
@@ -129,7 +130,7 @@ namespace Teamproject {
 	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e)
 	{
 		g = panel1->CreateGraphics();
-		grayBrush = gcnew System::Drawing::SolidBrush(Color::Gray);
+		/*grayBrush = gcnew System::Drawing::SolidBrush(Color::Gray);*/
 		blackPen = gcnew System::Drawing::Pen(Color::Black);
 		initalize();
 		
@@ -221,7 +222,8 @@ public: System::Void initalize()
 	//	drawWorld();
 	//}
 
-	private: void drawWorld() {
+	private: 
+		void drawWorld() {
 		//Declare local variables;
 		//		int row, col;
 		int x, y;
@@ -229,7 +231,7 @@ public: System::Void initalize()
 		//Refresh the panel
 		panel1->Refresh();
 
-		/*Drawing::Icon^ street = gcnew System::Drawing::Icon("street.ico");*/
+		Drawing::Icon^ street = gcnew System::Drawing::Icon("street.ico");
 		//Draw the empty maze
 		for (int row = 0; row < 8; row++)
 		{
@@ -237,13 +239,14 @@ public: System::Void initalize()
 			{
 				x = col * 35;
 				y = row * 35;
-				Rectangle gridRect = Rectangle(x, y, 35 - 1, 35 - 1);
-				g->FillRectangle(grayBrush, gridRect);
-				g->DrawRectangle(blackPen, gridRect);
+				Rectangle gridRect1 = Rectangle(x, y, 35 - 1, 35 - 1);
+				g->DrawIcon(street, gridRect1);
+				g->DrawRectangle(blackPen, gridRect1);
 			}
 		}
 	}
-	private: System::Void timer1_Tick_1(System::Object^  sender, System::EventArgs^  e) {
+	private:
+		System::Void timer1_Tick_1(System::Object^  sender, System::EventArgs^  e) {
 		comline++;
 		if (comline < numofCommands)
 		{
@@ -340,6 +343,12 @@ public: System::Void initalize()
 
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 	drawWorld();
+}
+private: System::Void MyForm_Load_1(System::Object^  sender, System::EventArgs^  e) {
+	g = panel1->CreateGraphics();
+	blackPen = gcnew System::Drawing::Pen(Color::Black);
+
+
 }
 };
 }
