@@ -3,6 +3,7 @@
 #include "World.h"
 #include "Robot.h"
 #include "Cell.h"
+#include "Parse2.h"
 
 #include "fileParse.h"
 
@@ -88,7 +89,7 @@ namespace Teamproject {
 				 // 
 				 // button1
 				 // 
-				 this->button1->Location = System::Drawing::Point(203, 380);
+				 this->button1->Location = System::Drawing::Point(220, 409);
 				 this->button1->Name = L"button1";
 				 this->button1->Size = System::Drawing::Size(188, 23);
 				 this->button1->TabIndex = 1;
@@ -98,9 +99,9 @@ namespace Teamproject {
 				 // 
 				 // panel1
 				 // 
-				 this->panel1->Location = System::Drawing::Point(53, 59);
+				 this->panel1->Location = System::Drawing::Point(125, 3);
 				 this->panel1->Name = L"panel1";
-				 this->panel1->Size = System::Drawing::Size(623, 299);
+				 this->panel1->Size = System::Drawing::Size(400, 400);
 				 this->panel1->TabIndex = 2;
 				 // 
 				 // MyForm
@@ -114,15 +115,19 @@ namespace Teamproject {
 
 			 }
 #pragma endregion
+			 Drawing::Icon^ robt = gcnew System::Drawing::Icon("robotleft.ico");
 			 int numofCommands;
 			 int comline = 0;
-			 int worldWidth, worldHeight;
+			 int worldHeight, worldWidth;
 			 int cellWidth, cellHeight;
 			 World^ world;
 			 Robot^ robot;
 			 fileParse *parse;
 			 char **commands;
 			 array <Cell^, 2>^ worl; 
+			 moveparse *read;
+			 Drawing::Icon ^ic;
+			 Bitmap ^ b;
 
 
 
@@ -153,14 +158,13 @@ public: System::Void initalize()
 
 		//loop to initlize wolrdWidth and wolrdHeight
 
-		for (int u = 0; u < numofCommands; u++)
-		{
-			if (tolower(commands[u][0] == 'wor'))
+		int u = 0;
+			if (commands[u][0] == 'w')
 			{
-				worldWidth = commands[u][1] - '0';
-				worldHeight = commands[u][2] - '0';
+				 worldWidth = commands[u][1]-48 ;
+				 worldHeight = commands[u][2]-48;
 			}
-		}
+	
 		worl = gcnew array<Cell^, 2>(worldWidth, worldHeight);
 		cellWidth = panel1->Width / worldWidth;
 		cellHeight = panel1->Height / worldHeight;
@@ -175,18 +179,18 @@ public: System::Void initalize()
 		}
 
 
-		for (int i = 0; i < numofCommands; i++)
+		for (int i = 0; i < numofCommands ; i++)
 		{
 			for (int j = 0; j < args; j++)
 			{
-				if (commands[i][j] == 'wall') {
-					worl[commands[i][j + 1] - '0', commands[i][j + 3] - '0']->setWalls(commands[i][j + 3] - '0');
+				if (commands[i][j] == 'e') {
+					worl[commands[i][j + 1] - 48, commands[i][j + 2] - 48]->setWalls(commands[i][j + 3] - 48);
 				}
-				else if (commands[i][j] == 'bee') {
-					worl[commands[i][j + 1] - '0', commands[i][j + 2] - '0']->setBeeper(commands[i][j + 3] - '0');
+				else if (commands[i][j] == 'b') {
+					worl[commands[i][j + 1] - 48, commands[i][j + 2] - 48]->setBeeper(commands[i][j + 3] - 48);
 				}
-				else  if (commands[i][j] == 'rob') {
-					robot = gcnew Robot(commands[i][j + 1] - '0', commands[i][j + 2] - '0', commands[i][j + 3] - '0', commands[i][j + 4] - '0');
+				else  if (commands[i][j] == 'r') {
+					robot = gcnew Robot(commands[i][j + 1] - 48, commands[i][j + 2] - 48, commands[i][j + 3] - 48, commands[i][j + 4] - 48);
 				}
 
 			}
@@ -224,6 +228,7 @@ public: System::Void initalize()
 
 	private: 
 		void drawWorld() {
+	
 		//Declare local variables;
 		//		int row, col;
 		int x, y;
@@ -233,24 +238,39 @@ public: System::Void initalize()
 
 		Drawing::Icon^ street = gcnew System::Drawing::Icon("street.ico");
 		//Draw the empty maze
-		for (int row = 0; row < 8; row++)
+		for (int row = 0; row < worldHeight; row++)
 		{
-			for (int col = 0; col < 8; col++)
+			for (int col = 0; col < worldWidth; col++)
 			{
-				x = col * 35;
-				y = row * 35;
-				Rectangle gridRect1 = Rectangle(x, y, 35 - 1, 35 - 1);
+				x = col * cellWidth;
+				y = row * cellHeight;
+				Rectangle gridRect1 = Rectangle(x, y, cellWidth - 1, cellHeight - 1);
 				g->DrawIcon(street, gridRect1);
 				g->DrawRectangle(blackPen, gridRect1);
+			
+				
+			
+				
 			}
+			panel1->Refresh();
 		}
 	}
 	private:
 		System::Void timer1_Tick_1(System::Object^  sender, System::EventArgs^  e) {
-		comline++;
-		if (comline < numofCommands)
+			read = new moveparse();
+
+			int h = read->getlines();
+			array<Int32 ^> ^ com2 = gcnew array<Int32 ^>(h);
+			
+			for (int i = 0; i <h; i++)
+			{
+				com2[i] = read->readfile(i);
+			}
+
+		
+		if (comline < h)
 		{
-			if (commands[comline][0] == 'm')
+			if (com2[comline] = 1)
 			{
 				switch (robot->getDirc()) {
 				case 1:
@@ -262,6 +282,7 @@ public: System::Void initalize()
 							worl[robot->getRow(), robot->getCol() - 1]->canmoveDown())
 						{
 							robot->move();
+							comline++;
 						}
 					}
 					break;
@@ -275,6 +296,7 @@ public: System::Void initalize()
 							worl[robot->getRow(), robot->getCol() + 1]->canmoveLeft())
 						{
 							robot->move();
+							comline++;
 						}
 					}
 
@@ -289,6 +311,7 @@ public: System::Void initalize()
 							worl[robot->getRow(), robot->getCol() + 1]->canmoveUp())
 						{
 							robot->move();
+							comline++;
 						}
 					}
 					break;
@@ -302,16 +325,18 @@ public: System::Void initalize()
 							worl[robot->getRow(), robot->getCol() - 1]->canmoveRight())
 						{
 							robot->move();
+							comline++;
 						}
 					}
 					break;
 				}
 			}
-			if (commands[comline][0] == 'left')
+			if (com2[comline] = 2)
 			{
 				robot->turnLeft();
+				comline++;
 			}
-			if (commands[comline][0] == 'pick')
+			if (com2[comline] =3)
 			{
 				if (worl[robot->getRow(), robot->getCol()]->getBeepers() > 0)
 				{
@@ -320,7 +345,7 @@ public: System::Void initalize()
 						(worl[robot->getRow(), robot->getCol()]->getBeepers() - 1);
 				}
 			}
-			if (commands[comline][0] == 'pla')
+			if (com2[comline] =4)
 			{
 				if (robot->getbeepercount() > 0)
 				{
@@ -329,7 +354,7 @@ public: System::Void initalize()
 						(worl[robot->getRow(), robot->getCol()]->getBeepers() + 1);
 				}
 			}
-			if (commands[comline][0] == 'off')
+			if (com2[comline] =-1)
 			{
 				timer1->Stop();
 			}
@@ -337,17 +362,30 @@ public: System::Void initalize()
 
 
 		}
-		MessageBox::Show("Number of Beeper in Karel's Bag is" + robot->getbeepercount());
+		/*MessageBox::Show("Number of Beeper in Karel's Bag is" + robot->getbeepercount());*/
 		
 	}
 
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-	drawWorld();
+drawWorld();
+	int x,y;
+	x = robot->getRow() * cellWidth;
+	y = robot->getCol() * cellHeight;
+
+	
+
+	Rectangle robotRect = Rectangle(x, y, cellWidth, cellHeight);
+	g->DrawIcon(robt, robotRect);
+	timer1->Start();
+
+	
 }
 private: System::Void MyForm_Load_1(System::Object^  sender, System::EventArgs^  e) {
 	g = panel1->CreateGraphics();
-	blackPen = gcnew System::Drawing::Pen(Color::Black);
+		
 
+	blackPen = gcnew System::Drawing::Pen(Color::Black);
+	initalize();
 
 }
 };

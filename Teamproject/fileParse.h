@@ -4,12 +4,15 @@
 #include <sstream>
 #include <algorithm>
 
+
 class fileParse {
 
 private:
-	char **comArray; //array that holds the number of commands from the file
+	char **comArray;
+	
+	//array that holds the number of commands from the file
 	std::ifstream inputFile;
-	const std::string FILENAME = "commands.txt";//file name when we get one
+	const std::string FILENAME = "commands2.txt";//file name when we get one
 	int numberofCom;
 
 

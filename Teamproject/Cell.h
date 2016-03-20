@@ -12,9 +12,7 @@ private:
 	bool moveDown = true;
 	bool moveLeft = true;
 	bool moveRight = true;
-	/*SolidBrush^ cellCol = gcnew SolidBrush(Color::White);
 
-	Pen ^wall = gcnew Pen(Color::Black);*/
 
 public:
 
@@ -36,9 +34,9 @@ public:
 	bool canmoveDown();
 	bool canmoveLeft();
 
-	
-	/*void DrawCell(Graphics^, Rectangle^,Bitmap^);
-	void DrawWalls(Graphics^ ,Rectangle^);*/
+	void drawBox(Graphics^,Rectangle^, Icon^ico);
+	void DrawCell(Graphics^, Rectangle^);
+	void DrawWalls(Graphics^ ,Rectangle^);
 
 
 };

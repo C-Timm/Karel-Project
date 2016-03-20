@@ -142,6 +142,7 @@
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="fileParse.cpp" />
     <ClCompile Include="MyForm.cpp" />
+    <ClCompile Include="Parse2.cpp" />
     <ClCompile Include="Robot.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +152,7 @@
     <ClInclude Include="MyForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Parse2.h" />
     <ClInclude Include="Robot.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>

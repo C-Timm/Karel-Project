@@ -25,39 +25,43 @@ void Cell::setWalls(int w)
 		break;
 	}
 }
-//
-//void Cell::DrawWalls(Graphics^ g, Rectangle^ rec)
-//	{
-//		if (!moveDown)
-//			{
-//				g->DrawLine(wall, rec->Left,rec->Bottom,rec->Right,rec->Bottom);
-//			}
-//		if(!moveLeft)
-//			{
-//				g->DrawLine(wall, rec->Left,rec->Top,rec->Left, rec->Bottom);
-//			}
-//		if(!moveUp)
-//			{
-//				g->DrawLine(wall,rec->Left, rec->Top,rec->Right, rec->Bottom);
-//			}
-//		if(!moveRight)
-//			{
-//				g->DrawLine(wall, rec->Left, rec->Top, rec->Right, rec->Bottom);
-//			}
-//	}
-//
-////void Cell::DrawCell(Graphics^ g, Rectangle^ rec)
-////{
-////g->FillRectangle(cellCol,rec->X,rec->Y,rec->Width, rec->Height);
-////DrawWalls(g,rec);
-////}
-//void Cell::DrawCell(Graphics^g, Rectangle^ r, Bitmap^b)
-//{
-//	g->DrawImage(b, r->X, r-> Y);
-//	DrawWalls(g, r);
-//
-//
-//}
+
+void Cell::DrawWalls(Graphics^ g, Rectangle^ rec)
+	{
+		
+
+		Pen ^wall = gcnew Pen(Color::Black);
+		if (!moveDown)
+			{
+				g->DrawLine(wall, rec->Left,rec->Bottom,rec->Right,rec->Bottom);
+			}
+		if(!moveLeft)
+			{
+				g->DrawLine(wall, rec->Left,rec->Top,rec->Left, rec->Bottom);
+			}
+		if(!moveUp)
+			{
+				g->DrawLine(wall,rec->Left, rec->Top,rec->Right, rec->Bottom);
+			}
+		if(!moveRight)
+			{
+				g->DrawLine(wall, rec->Left, rec->Top, rec->Right, rec->Bottom);
+			}
+	}
+
+void Cell::DrawCell(Graphics^ g, Rectangle^ rec)
+{
+	SolidBrush^ cellCol = gcnew SolidBrush(Color::White);
+	g->FillRectangle(cellCol,rec->X,rec->Y,rec->Width, rec->Height);
+	DrawWalls(g,rec);
+}
+void Cell::drawBox(Graphics^g, Rectangle^ r, Icon^ico)
+{
+	g->DrawIcon(ico, r->X, r->Y);
+	DrawWalls(g, r);
+
+
+}
 
 void Cell::setBeeper(int b)
 {

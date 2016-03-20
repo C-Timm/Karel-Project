@@ -5,6 +5,7 @@ fileParse::fileParse()
 {
 	//finds number of lines in the file
 	numberofCom = getNumLines();
+	/*array<char^, 2> ^ comArray = gcnew array<char^, 2>(numberofCom, 5);*/
 	//initialize array 
 	comArray = new char*[numberofCom];
 	//add loop
@@ -39,7 +40,7 @@ int fileParse::getnumberofCom()
 
 char** fileParse::parsingComs()
 {
-
+	/*array<char^, 2> ^ comArray = gcnew array<char^, 2>(numberofCom, 5);*/
 	std::string currentLine; //buffer for reading lines and parsing
 	std::string words[5];    //array of words of the current line
 	std::string currentWord;
@@ -66,54 +67,35 @@ char** fileParse::parsingComs()
 		*/
 
 		currentWord = words[0];
-		if (currentWord == "world")
+		if (currentWord == "wor")
 		{
-			comArray[l][0] = 'wor';
+			comArray[l][0] = words[0][0];
 			comArray[l][1] = words[1][0];
 			comArray[l][2] = words[2][0];
 		}
-		else if (currentWord == "beepers")
+		else if (currentWord == "beep")
 		{
-			comArray[l][0] = 'bee';
-			comArray[l][1] = words[1][0];
-			comArray[l][2] = words[2][0];
-			comArray[l][3] = words[3][0];
-		}
-		else if (currentWord == "wall")
-		{
-			comArray[l][0] = 'wall';
+			comArray[l][0] = words[0][0];
 			comArray[l][1] = words[1][0];
 			comArray[l][2] = words[2][0];
 			comArray[l][3] = words[3][0];
 		}
-		else if (currentWord == "robot")
+		else if (currentWord == "edge")
 		{
-			comArray[l][0] = 'rob';
+			comArray[l][0] = words[0][0];
+			comArray[l][1] = words[1][0];
+			comArray[l][2] = words[2][0];
+			comArray[l][3] = words[3][0];
+		}
+		else if (currentWord == "robo")
+		{
+			comArray[l][0] = words[0][0];
 			comArray[l][1] = words[1][0];
 			comArray[l][2] = words[2][0];
 			comArray[l][3] = words[3][0];
 			comArray[l][4] = words[4][0];
 		}
-		else if (currentWord == "move")
-		{
-			comArray[l][0] = 'move';
-		}
-		else if (currentWord == "turnleft")
-		{
-			comArray[l][0] = 'left';
-		}
-		else if (currentWord == "pickbeeper")
-		{
-			comArray[l][0] = 'pick';
-		}
-		else if (currentWord == "placebeeper")
-		{
-			comArray[l][0] = 'pla';
-		}
-		else if (currentWord == "turnoff")
-		{
-			comArray[l][0] = 'off';
-		}
+		
 
 		l++;
 	}
