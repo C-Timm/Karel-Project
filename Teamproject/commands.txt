@@ -1,12 +1,147 @@
-world 5 7
-beepers 2 6 1
-robot 2 2 3 0
-Wall 2 3 1
-move 
+world 8 8
+
+beepers 1 1 1
+beepers 5 1 1
+beepers 7 2 1
+beepers 1 3 1
+beepers 5 5 1
+beepers 6 7 1
+
+robot 2 2 2 0
+
+wall 1 1 4
+wall 1 2 2
+wall 1 2 3
+wall 1 3 2
+wall 1 4 2
+wall 1 5 2
+wall 1 6 2
+wall 3 1 2
+wall 3 2 2
+wall 5 2 3
+wall 6 2 3
+wall 6 2 2
+wall 7 2 3
+wall 4 5 1
+wall 5 5 1
+wall 5 5 2
+wall 5 6 2
+wall 5 7 2
+turnleft
+
+move
+
+turnleft
+move
+pickbeeper
+turnleft
+turnleft
+
+move
+
+turnleft
+turnleft
+turnleft
+move
+move
+move
+move
+move
+move
+turnleft
+turnleft
+turnleft
+move
+turnleft
+turnleft
+turnleft
+move
+move
+move
+move
+pickbeeper
+turnleft
+move
+turnleft
+move
+move
+move
+move
+turnleft
+move
+move
+move
+move
+move
 turnleft
 move
 move
 pickbeeper
+turnleft
+move
+move
+turnleft
+turnleft
+turnleft
+move
+turnleft
+turnleft
+turnleft
+move
+move
+move
+turnleft
+turnleft
+turnleft
+move
+move
+move
+pickbeeper
+turnleft
+turnleft
+move
+move
+move
+move
+turnleft
+move
+move
+turnleft
+turnleft
+turnleft
+move
+move
+turnleft
+turnleft
+turnleft
+move
+pickbeeper
+move
+move
+turnleft
+turnleft
+turnleft
+move
+pickbeeper
+turnleft
+turnleft
+move
+move
+turnleft
 move
 placebeeper
+
+move
+placebeeper
+move
+placebeeper
+turnleft
+move
+placebeeper
+turnleft
+move
+placebeeper
+move
+placebeeper
+move
 turnoff
