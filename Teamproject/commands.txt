@@ -1,14 +1,11 @@
 world 8 8
-
 beepers 1 1 1
 beepers 5 1 1
 beepers 7 2 1
 beepers 1 3 1
 beepers 5 5 1
 beepers 6 7 1
-
 robot 2 2 2 0
-
 wall 1 1 4
 wall 1 2 2
 wall 1 2 3
@@ -28,17 +25,13 @@ wall 5 5 2
 wall 5 6 2
 wall 5 7 2
 turnleft
-
 move
-
 turnleft
 move
 pickbeeper
 turnleft
 turnleft
-
 move
-
 turnleft
 turnleft
 turnleft
@@ -130,7 +123,6 @@ move
 turnleft
 move
 placebeeper
-
 move
 placebeeper
 move
