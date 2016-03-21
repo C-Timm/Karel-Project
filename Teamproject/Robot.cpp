@@ -1,6 +1,6 @@
 #include "Robot.h"
 
-Robot::Robot(int newRow, int newCol, int newDir, int newBeep) 
+Robot::Robot(int newRow, int newCol, int newDir, int newBeep) : Item()
 //if (robot->getRow() == row && robot->getCol() == col)
 //{
 //	worl[row, col]->drawBox(g, gridRect1, robt);
@@ -9,38 +9,39 @@ Robot::Robot(int newRow, int newCol, int newDir, int newBeep)
 //worl[row, col]->DrawCell(g, gridRect1);
 
 {
-	//setIcon();
+	
 	dir = newDir;
+	setIcon(newDir);
 	beep = newBeep;
 	row = newRow;
 	col = newCol;
 
 }
-//
-//void Robot::setIcon()
-//{
-//
-//	robotup = gcnew System::Drawing::Icon("robotup.ico");
-//	robotright = gcnew System::Drawing::Icon("robotright.ico");
-//	robotleft = gcnew System::Drawing::Icon("robotleft.ico");
-//	robotdown = gcnew System::Drawing::Icon("robotDown.ico");
-//	icon = 0;
-//
-//}
-//System::Drawing::Icon^ Robot::getIcon()
-//{
-//
-//	if (icon == 0)
-//		return robotright;
-//	else if (icon == 1)
-//		return robotleft;
-//	else if (icon == 2)
-//	return robotup;
-//	else
-//		return robotdown;
-//
-//
-//}
+
+void Robot::setIcon(int newDir)
+{
+
+	robotup = gcnew System::Drawing::Icon("robotup.ico");
+	robotright = gcnew System::Drawing::Icon("robotright.ico");
+	robotleft = gcnew System::Drawing::Icon("robotleft.ico");
+	robotdown = gcnew System::Drawing::Icon("robotDown.ico");
+	icon = newDir;
+
+}
+System::Drawing::Icon^ Robot::getIcon( )
+{
+
+	if (icon == 1)
+		return robotup;
+	else if (icon == 2)
+		return robotright;
+	else if (icon == 3)
+	return robotdown;
+	else
+		return robotleft;
+
+
+}
 
 void Robot::move()
 {

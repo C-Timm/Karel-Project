@@ -13,9 +13,9 @@ protected:
 
 public:
 	Robot(int, int, int, int); //default constructor 
-	//System::Drawing::Icon^ Robot::getIcon() override;
+	System::Drawing::Icon^ Robot::getIcon() override;
 
-	//void Robot::setIcon() override;
+	void Robot::setIcon(int) override;
 
 
 	//Mutators
